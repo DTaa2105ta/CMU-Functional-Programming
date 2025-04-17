@@ -1,0 +1,156 @@
+%% Macros for 15-150 assignments
+
+\newcommand{\printdue}[1]{\vspace{-0.5cm}{\Large{\textbf{\hl{Due:} #1}}}}
+
+\newcommand{\hint}[1]{\footnote{ {\it Hint:} #1}}
+
+%% Task and solution environments
+
+\newcounter{taskCounter}
+\setcounter{taskCounter}{0}
+
+\newcounter{taskBonusCounter}
+\setcounter{taskBonusCounter}{0}
+
+\newcounter{pointsCounter}
+\setcounter{pointsCounter}{0}
+
+\newcounter{pointsBonusCounter}
+\setcounter{pointsBonusCounter}{0}
+
+% Task numbering variables resets to zero each time section changes
+\newcounter{taskNum}[section]
+\setcounter{taskNum}{0}
+
+% Written tasks
+\newenvironment{task}[1]
+{
+  \addtocounter{taskCounter}{1}
+  \addtocounter{pointsCounter}{#1}
+  \addtocounter{taskNum}{1}
+  \begin{framed}
+  \noindent
+  \textbf{Task \arabic{section}.\arabic{taskNum}} (#1 points)
+}
+{
+  \end{framed}
+}
+
+% Code tasks (do not need answers in the pdf)
+\newenvironment{codetask}[1]
+{
+  \addtocounter{taskCounter}{1}
+  \addtocounter{pointsCounter}{#1}
+  \addtocounter{taskNum}{1}
+  \begin{framed}
+  \noindent
+  \textbf{Coding Task \arabic{section}.\arabic{taskNum}} (#1 points)
+}
+{
+  \end{framed}
+}
+
+% Bonus tasks are highlighted
+\newenvironment{bonustask}[1]
+{
+  \addtocounter{taskBonusCounter}{1}
+  \addtocounter{pointsBonusCounter}{#1}
+  \addtocounter{taskNum}{1}
+  \begin{framed}
+  \noindent
+  \colorbox{yellow}{%
+    \textbf{Bonus Task \arabic{section}.\arabic{taskNum}} (#1 points)
+  }
+}
+{
+  \end{framed}
+}
+
+% Bonus code tasks (do not need answers in the pdf)
+\newenvironment{bonuscodetask}[1]
+{
+  \addtocounter{taskBonusCounter}{1}
+  \addtocounter{pointsBonusCounter}{#1}
+  \addtocounter{taskNum}{1}
+  \begin{framed}
+  \noindent
+  \colorbox{yellow}{%
+    \textbf{Bonus Coding Task \arabic{section}.\arabic{taskNum}} (#1 points)
+  }
+}
+{
+  \end{framed}
+}
+
+% Lab tasks
+\newenvironment{labtask}[1]
+{
+  \addtocounter{taskCounter}{1}
+  \addtocounter{pointsCounter}{#1}
+  \addtocounter{taskNum}{1}
+  \begin{framed}
+  \noindent
+  \textbf{Task \arabic{section}.\arabic{taskNum}} (#1 points)
+}
+{
+  \end{framed}
+}
+
+
+\AtEndDocument{\clearpage
+  \typeout{^^J^^J^^J******** Assignment summary ********}
+  \typeout{^^J-- \arabic{taskCounter} tasks worth \arabic{pointsCounter} points}
+  \ifthenelse{\value{taskBonusCounter} > 0}
+  {
+    \typeout{^^J--\arabic{taskBonusCounter} bonus tasks worth \arabic{pointsBonusCounter} bonus points}
+  }{}
+  \typeout{^^J^^J************************************^^J^^J^^J}
+}
+
+
+\definecolor{solutioncolor}{rgb}{0.5, 0.0, 0.0}
+
+% Reference solution (colored)
+\ifthenelse{\equal{\issolution}{true}}
+{
+  \newenvironment{refsol}
+  {%
+    \noindent%
+    \fbox{\textcolor{solutioncolor}{\bf Solution \arabic{section}.\arabic{taskNum}}} 
+    \begingroup\color{solutioncolor}
+  }
+  {
+    \endgroup
+  }
+}
+{
+  \excludecomment{refsol}
+}
+
+% Student solution (no color)
+\ifthenelse{\equal{\issolution}{true}}
+{
+  \newenvironment{solution}
+  {%
+    \noindent%
+    {\bf Solution \arabic{section}.\arabic{taskNum}}
+  }
+  {
+  }
+  \newenvironment{labsol}[1]
+  {%
+    \begin{center}
+    \begin{tabular}{|p{0.97\textwidth}|}
+    \hline
+    {\bf Solution \arabic{section}.\arabic{taskNum}} \\[#1]
+  }
+  {
+    \\\hline
+    \end{tabular}
+    \end{center}
+  }
+}
+{
+  \excludecomment{solution}
+}
+
