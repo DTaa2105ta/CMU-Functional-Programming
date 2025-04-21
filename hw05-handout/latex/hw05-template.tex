@@ -1,0 +1,219 @@
+
+\documentclass[11pt]{article}
+
+\newcommand{\issolution}{true}
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+
+\input{preamble.tex}
+\input{asgn.tex}
+
+\title{\textbf{15-150 Fall 2024\\Homework 05}}
+\author{YOUR NAME HERE -- \texttt{YOUR ANDREWID HERE}}
+
+\begin{document}
+\maketitle
+
+\section{SML in Action}
+
+\subsection{Type Inference}
+
+\begin{task}{2} %
+Carry out type inference on the following function:
+\begin{sml}[numbers=left]
+fun woof ([], puppy) = puppy
+  | woof (sooo::CUTE, puppy) = 4.0 + woof(CUTE, puppy)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Carry out type inference on the following function:
+\begin{sml}[numbers=left]
+fun f (empty, n) = nil
+  | f (node(L,x,R),n) = node(f(L,n+1), (x,n), f(R,n+1))
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Carry out type inference on the following function:
+\begin{sml}[numbers=left]
+fun f x = f (f (x+1))
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Scope}
+
+\begin{task}{6} %
+Consider the following code fragment:
+\begin{sml}[numbers=left]
+val x : int = 5
+val y : real = 2.0
+val temp : real = real (x - 1)
+fun generate (x : int, y : real, z : real) : int =
+  let
+    val g : real =
+      let
+        val x : int = 3
+        val z : real = z * y
+        val k : real = temp * (real x) 
+        val a : int = 38
+        val y : real = k * y
+      in
+        z * y + (real a) + k
+      end
+  in
+    x + trunc g
+  end
+
+val z = generate (x, y, temp)
+\end{sml}
+
+\begin{enumerate}
+\item%
+  What value gets substituted for the variable \smle{x} on line (10)?  Briefly
+  explain why.  What is its type?
+\item%
+  What value gets substituted for the variable \smle{k} on line (12)?  Briefly
+  explain why.  What is its type?
+\item%
+  What value gets substituted for the variable \smle{x} on line (17)?  Briefly
+  explain why.  What is its type?
+\item%
+  What value does the expression \smle{generate (x, y, temp)} evaluate to on
+  line (20)?
+\end{enumerate}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{7} %
+Consider the following code fragment:
+\begin{sml}[numbers=left]
+val x = ~1
+fun f x =
+    let
+      val y = x
+      val x = 90
+      fun f x = y + 9
+      val x = 50
+    in
+      f x
+    end
+val x = f x
+\end{sml}
+
+During the evaluation of \smle{f x} on line (11),
+\begin{enumerate}
+\item%
+  What value gets substituted for the variable \smle{y} on line (4)?  Briefly
+  explain why.  What is its type?
+\item%
+  What value gets substituted for the variable \smle{x} on line (9)?  Briefly
+  explain why.  What is its type?
+\item%
+  To what is the identifier \smle{f} bound on line (9)?
+\item%
+  What value gets substituted for the rightmost occurence of the variable
+  \smle{x} on line (11)?  Briefly explain why.  What is its type?
+\item%
+  What value gets substituted for the leftmost occurence of the variable
+  \smle{x} on line (11)?  Briefly explain why.  What is its type?
+\end{enumerate}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{6} %
+Consider the following code fragment:
+\begin{sml}[numbers=left]
+val x = 13
+val x =
+    let
+      val x = 14
+      val x = (case x mod 4
+                of 1 => "x"
+                 | 2 => "o") ^
+              let
+                val x = 9
+                val x = "x"
+              in
+                x
+              end
+    in
+      x ^ "o"
+    end
+\end{sml}
+
+\begin{enumerate}
+\item%
+  What value gets substituted for the leftmost occurrence of the variable
+  \smle{x} on line (5)?  Briefly explain why.  What is its type?
+\item%
+  What value gets substituted for the variable \smle{x} on line (12)?  Briefly
+  explain why.  What is its type?
+\item%
+  What value gets substituted for the variable \smle{x} on line (15)?  Briefly
+  explain why.  What is its type?
+\item%
+  What would change if line 1 were changed to \smle{val x = 12}? Why?
+\item%
+  What would change if line 4 were changed to \smle{val x = 12}? Why?
+\end{enumerate}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\section{Delimiters}
+
+\subsection{Nested Parentheses}
+
+\addtocounter{taskNum}{1}
+\subsection{Parentheses Trees}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\subsection{Beyond Parentheses}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\section{Common Subsequences}
+
+\begin{task}{3}
+Write down a mathematical inductive definition for a function that computes the
+longest common subsequence of two sequences based on the properties above.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\end{document}

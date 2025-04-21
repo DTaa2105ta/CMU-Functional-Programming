@@ -1,0 +1,251 @@
+
+\documentclass[11pt]{article}
+
+\newcommand{\issolution}{true}
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+
+\input{preamble.tex}
+\input{asgn.tex}
+
+\title{\textbf{15-150 Fall 2024\\Homework 01}}
+\author{YOUR NAME HERE -- \texttt{YOUR ANDREWID HERE}}
+
+\begin{document}
+\maketitle
+
+\section{Interpreting error messages}
+
+\begin{task}{2} %
+What error message do you see when you evaluate the \smle{errors.sml} file
+without modifying it?  What caused this error? How can it be
+fixed?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+What is the next batch of errors?  What caused these errors? How can they be
+fixed?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+What error do you see after that?  What caused it? How can it be fixed?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+What is the next error?  What caused it?  How can it be fixed?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+After this, you should see two errors.  What are they?  What caused them?  How
+can they be fixed?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{4} %
+Once you have fixed these errors, you will get a bunch more errors.  Two
+simple fixes are sufficient to make them go away.  What are these errors? What
+caused them? What are the fixes?
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\section{Specs and Functions}
+
+\begin{task}{2}
+\begin{sml}
+(* octal n ==> r
+ * REQUIRES: true
+ * ENSURES:  r <> 0 (r is a non-zero number)
+ *)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2}
+\begin{sml}
+(* octal n ==> r
+ * REQUIRES: n > 0
+ * ENSURES:  true
+ *)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2}
+\begin{sml}
+(* octal n ==> r
+ * REQUIRES: n >= 0
+ * ENSURES:  r <> 0 (r is a non-zero number)
+ *)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2}
+\begin{sml}
+(* octal n ==> r
+ * REQUIRES: n >= 0
+ * ENSURES:  r >= 0 (r is a non-negative number)
+ *)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2}
+\begin{sml}
+(* octal n ==> r
+ * REQUIRES: n >= 0
+ * ENSURES:  r > 0 (r is a positive number)
+ *)
+\end{sml}
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Which \emph{one} of these specifications gives the \emph{most} information
+about the applicative behavior of the function \smle{octal}? Say
+why, briefly.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\section{Inductive Definitions}
+
+\subsection{The Hosoya triangle}
+
+\begin{task}{8} %
+Give an inductive definition of the \emph{Hosoya coefficient} $H(n,k)$
+\textbf{based on the way the Hosoya triangle is built}.  Consider carefully
+the number of base and inductive cases, and the conditions under which each
+applies.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{5} %
+The mathematical property defining that the left edge of the Hosoya triangle
+corresponds to the Fibonacci number sequence is as follows:
+
+\begin{property}
+\label{prop:left-edge}
+For all natural number $n$,
+$$
+H(n,0) = Fib(n)
+$$
+\end{property}
+Prove this property by induction on $n$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{10} %
+By induction on $n$, prove the following property:
+
+\begin{property}
+\label{prop:h-fib}
+  For all natural numbers $n$ and $k$ such that $0 \leq k \leq n$,
+  $$
+  H(n,k) = Fib(k) \times Fib(n-k)
+  $$
+\end{property}
+\textbf{Hint:} your  proof should match the structure of your inductive
+definition for $H$ exactly: same cases, same conditions.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{3} %
+You may have noticed that each row of the Hosoya triangle has the same numbers
+whether read from left to right or from right to left (the Hosoya triangle has
+vertical symmetry).  This is mathematically expressed by the following
+property:
+
+\begin{property}
+\label{prop:symmetry}
+  For all natural numbers $n$ and $k$ such that $0 \leq k \leq n$,
+  $$
+  H(n, k) = H(n, n-k)
+  $$
+\end{property}
+
+Prove this property.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{3} %
+Symmetry (or an easy observation) allows us to conclude that the rightmost
+edge of the Hosoya triangle is again the Fibonacci numbers.  Formulate this
+fact as a mathematical property and prove it.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Coding it up}
+
+\addtocounter{taskNum}{1}
+\end{document}

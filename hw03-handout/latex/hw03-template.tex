@@ -1,0 +1,127 @@
+
+\documentclass[11pt]{article}
+
+\newcommand{\issolution}{true}
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+
+\input{preamble.tex}
+\input{asgn.tex}
+
+\title{\textbf{15-150 Fall 2024\\Homework 03}}
+\author{YOUR NAME HERE -- \texttt{YOUR ANDREWID HERE}}
+
+\begin{document}
+\maketitle
+
+\declarecommand{\nil}{\mathit{nil}}
+\declarecommand{\op}{mult}
+\declarecommand{\opMf}[2]{#1 \times #2}
+\declarecommand{\opCf}[2]{\smle{#1 * #2}}
+\declarecommand{\opM}{\mathit{\op}}
+\declarecommand{\opMTail}{\mathit{{\op}Tail}}
+\declarecommand{\opMTailAux}{\mathit{{\op}Tail'}}
+\declarecommand{\opC}{\smle{mult}}
+\declarecommand{\opCTail}{\smle{multTail}}
+\declarecommand{\opCTailAux}{\smle{multTail'}}
+\section{Straight Recursion versus Tail Recursion}
+
+\subsection{Multiplying a list}
+
+\begin{task}{2} %
+Give the corresponding tail recursive definition, call it
+$\mathit{multTail}$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\addtocounter{taskNum}{1}
+\begin{task}{3} %
+Write the recurrence relation for the work of \smle{mult}, deduce an upper-bound
+approximation in closed form, and determine a tight big-O class for it.  Do
+the same for \smle{multTail}.  Which one is more efficient in practice?  Feel
+free to refer to calculations seen in class, but cite each occurrence.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle{mult}}}
+\declarecommand{\Wb}{W_{\smle{multTail}}}
+\declarecommand{\Wc}{W_{\smle{multTail'}}}
+\begin{task}{6} %
+Show that the inductive function definitions for \smle{mult} and
+\smle{multTail} compute the same mathematical function by proving the
+following property:
+
+\begin{property}
+For all \smle{l : int list}, \smle{mult l} $\cong$ \smle{multTail l}
+\end{property}
+
+\noindent
+If this proof makes use of an auxiliary lemma, state it and prove it.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Leaf}{\mathit{Leaf}}
+\declarecommand{\Node}{\mathit{Node}}
+\declarecommand{\treeOp}{\mathit{treeMin}}
+\declarecommand{\op}[2]{\min\{#1,#2\}}
+\subsection{Minimum of a Tree}
+
+\begin{task}{2} %
+Define the function $\treeOp: \mathbb{T} \rightarrow \mathbb{Z}$ that returns
+the smallest number in the tree given as input.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\addtocounter{taskNum}{1}
+\begin{task}{1} %
+Is it possible to give a tail-recursive implementation of $\treeOp$?  If your
+answer is ``yes'', give the code for it.  If your answer is ``no'', explain why.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\section{Prime factorization}
+
+\subsection{Let's factorize}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\subsection{Certificates}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\subsection{Prime, or not}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\section{Conway's Lost Cosmological Theorem}
+
+\subsection{Look and Say}
+
+\subsection{\ldots and Code too}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\subsection{Cultural Aside}
+
+\end{document}

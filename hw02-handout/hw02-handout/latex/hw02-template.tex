@@ -1,0 +1,259 @@
+
+\documentclass[11pt]{article}
+
+\newcommand{\issolution}{true}
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+
+\input{preamble.tex}
+\input{asgn.tex}
+
+\title{\textbf{15-150 Fall 2024\\Homework 02}}
+\author{YOUR NAME HERE -- \texttt{YOUR ANDREWID HERE}}
+
+\begin{document}
+\maketitle
+
+\declarecommand{\true}{\mathit{true}}
+\declarecommand{\false}{\mathit{false}}
+\declarecommand{\Empty}{\mathit{Empty}}
+\declarecommand{\Leaf}{\mathit{Leaf}}
+\declarecommand{\Node}{\mathit{Node}}
+\declarecommand{\iEmpty}{\mathit{iEmpty}}
+\declarecommand{\iLeaf}{\mathit{iLeaf}}
+\declarecommand{\iNode}{\mathit{iNode}}
+\declarecommand{\validate}{\mathit{validate}}
+\declarecommand{\iSize}{\mathit{iSize}}
+\declarecommand{\iH}{\mathit{iSize'}}
+\declarecommand{\tilt}{\mathit{tiltLeft}}
+\declarecommand{\Elt}{S}
+\section{Instrumented Trees}
+
+\subsection{Instrumented Trees}
+
+\begin{task}{2} %
+Give an inductive definition for the function $\iSize: \mathbb{TT}
+\rightarrow \mathbb{N}$ that computes the size of its argument.  The
+inductive clause should make two recursive calls.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Give an inductive definition of the function $\validate: \mathbb{TT}
+\rightarrow \mathbb{B}$ such that $\validate(t)$ returns $\true$ if the
+imbalance at every inner node of $t$ is correct, and $\false$ otherwise.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Give an inductive definition to the function $\iH: \mathbb{TT} \rightarrow
+\mathbb{N}$ such that $\iH(t) = \iSize(t)$ for a valid instrumented tree
+$t$.  Your definition of $\iH$ must be such that the evaluation of $\iH(t)$
+makes \emph{at most one} recursive call at each node it visits.  It may not
+use $\iSize$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Give an inductive definition of the function $\tilt: \mathbb{TT}
+\rightarrow \mathbb{TT}$ such that $\tilt(t)$ is the tree obtained from
+$t$ by selectively swapping the left and right subtrees so that each inner
+node has a non-positive imbalance.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Properties}
+
+\begin{task}{8} %
+Prove this property using an appropriate form of induction.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{10} %
+Prove this property using an appropriate form of induction.  You may assume
+the following lemma without proof (but you need to cite its use):
+
+\medskip
+\noindent
+\textbf{Lemma:} For all $t\in\mathbb{TT}$, $\iSize(\tilt(t)) = \iSize(t)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Implementation}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\declarecommand{\Nil}{\mathit{nil}}
+\declarecommand{\Cons}[2]{#1::#2}
+\declarecommand{\TurnString}{right}
+\declarecommand{\makeTurnString}{turnRight}
+\declarecommand{\DOM}{\mathbb{N}}
+\declarecommand{\Turn}{\mathit{\TurnString}}
+\declarecommand{\Step}[1]{\mathit{step}\:#1}
+\declarecommand{\N}{\mathit{north}}
+\declarecommand{\E}{\mathit{east}}
+\declarecommand{\W}{\mathit{west}}
+\declarecommand{\makeTurn}{\mathit{\makeTurnString}}
+\declarecommand{\Move}{\mathit{move}}
+\declarecommand{\getPos}{\mathit{getPosition}}
+\declarecommand{\reverse}{\mathit{reverse}}
+\declarecommand{\goBack}{\mathit{goBack}}
+\section{The SML-Robot}
+
+\subsection{Operating the Robot}
+
+\begin{task}{2} %
+Define the function $\makeTurn: \mathbb{P} \rightarrow \mathbb{P}$ such that
+$\makeTurn(p)$ returns the new position of the robot at position $p$ when
+receiving the instruction $\Turn$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Define the function $\Move: \DOM \times \mathbb{P} \rightarrow
+\mathbb{P}$ such that $\Move(n, p)$ returns the new position of the robot at
+position $p$ when receiving the instruction $\Step{n}$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{3} %
+Define the function $\getPos: \mathbb{L_I} \times \mathbb{P} \rightarrow
+\mathbb{P}$ such that, given itinerary $l$ and initial robot position $p$, the
+function invocation $\getPos(l, p)$ returns its final position.  For example
+(abbreviating $\Turn$ as
+\ifthenelse{\equal{\TurnString}{left}}{``$L$''}{``$R$''} and $\Step{n}$ as
+``$s\:n$'' for conciseness),
+$$\renewcommand{\Step}[1]{s\:#1}
+\ifthenelse{\equal{\TurnString}{left}}
+{
+\getPos([\Step{2}, L, L, L,
+         \Step{2}, L,
+         \Step{2}, L, L, L,
+         \Step{2}, L, L, L,
+         \Step{3}, L,
+         \Step{1}],
+         (0,0,\N))
+}{
+\getPos([\Step{2}, R,
+         \Step{2}, R, R, R,
+         \Step{2}, R,
+         \Step{2}, R,
+         \Step{3}, R, R, R,
+         \Step{1}],
+         (0,0,\N))
+}
+$$
+has value $(5,1,\E)$.  This is visualized in Figure~\ref{fig:robot}.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Properties}
+
+\begin{task}{6} %
+Prove this property using an appropriate form of induction.  In your proof,
+you may (of course) rely on the definition of \emph{append} (written $@$).
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{2} %
+Define the function $\reverse: \mathbb{L_I} \rightarrow \mathbb{L_I}$ so that
+$\reverse(l)$ returns the itinerary that reverses the moves in $l$, ignoring
+the initial and final turnarounds.  For example,
+$$
+\reverse([\Step{2},\; \Turn,\; \Step{1}])
+$$
+returns the itinerary
+$$
+[\Step{1},\; \Turn,\; \Turn,\; \Turn,\; \Step{2}]
+$$
+(Convince yourself that this is indeed correct!)
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{1} %
+Using $\reverse$, define the function $\goBack: \mathbb{L_I}
+\rightarrow \mathbb{L_I}$ so that $\goBack(l)$ returns the itinerary that
+allows the robot to go back to the position it was at before executing $l$.
+Therefore,
+$$
+\goBack([\Step{2},\; \Turn,\; \Step{1}])
+$$
+returns the itinerary
+$$
+[\Turn,\; \Turn,\;
+ \Step{1},\;
+ \Turn,\; \Turn,\; \Turn,\;
+ \Step{2},\;
+ \Turn,\; \Turn]
+$$
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\begin{task}{3} %
+What is the corresponding property for $\goBack$?  State it and prove it
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\subsection{Implementation}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\end{document}

@@ -1,0 +1,136 @@
+%% Packages and Macros for 15-150
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage[colorlinks=true,breaklinks]{hyperref}
+\usepackage[pdftex,dvipsnames]{xcolor} 
+\usepackage{cancel}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage[short]{datetime}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{etoolbox}
+\usepackage{xparse}
+
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+
+\usepackage{soul}
+\sethlcolor{yellow}
+
+\usepackage[margin=2cm]{geometry}
+
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% For quotes
+\usepackage{csquotes}
+
+% symbols
+\newrobustcmd{\eeq}{\ensuremath{\cong}}
+
+% Boxes used in proof template
+\usepackage[colorinlistoftodos,prependcaption,textsize=footnotesize]{todonotes}
+\newcommand{\expl}[2]{\todo[inline,linecolor=#1,backgroundcolor=#1!25,bordercolor=#1]{#2}}
+
+\newcommand{\think}[1]{%
+  \begin{framed}
+    {\color{red}\textbf{Brain teaser:}} #1
+  \end{framed}
+}
+\newcommand{\exercise}[1]{%
+  \begin{framed}
+    {\color{red}\textbf{Exercise:}} #1
+  \end{framed}
+}
+
+% Markers for quantified variables (soundness and completeness
+% lecture)
+\newcommand{\eigenvar}[1]{\colorbox{red!50}{#1}}
+\newcommand{\term}[1]{\colorbox{green!50}{#1}}
+
+% Listings setting for SML code
+\usepackage{listings}
+\definecolor{eclipseBlue}{RGB}{42,0.0,255}
+\definecolor{eclipseGreen}{RGB}{63,127,95}
+\lstdefinelanguage{SML}{
+  basicstyle=\small\ttfamily,
+  captionpos=b,
+  tabsize=2,
+  columns=fixed,
+  breaklines=true,
+  showstringspaces=false,
+  mathescape=true,
+  %frame=l,
+  numbers=none,
+  upquote=true,
+  numberstyle=\small\ttfamily,
+  morekeywords= {
+    EQUAL, GREATER, LESS, NONE, SOME, 
+    abstraction, abstype, and, andalso, 
+    array, as, before, bool, case, char, 
+    datatype, do, else, end, eqtype, 
+    exception, exn, false, fn, fun, 
+    functor, handle, if, in, include, 
+    infix, infixr, int, let, list, local, 
+    nil, nonfix, not, o, of, op, open, 
+    option, orelse, overload, print, 
+    raise, real, rec, ref, sharing, sig, 
+    signature, string, struct, structure, 
+    substring, then, true, type, unit, val, 
+    vector, where, while, with, withtype, word
+  },
+  morestring=[b]",
+  morecomment=[s]{(*}{*)},
+  stringstyle=\color{black},
+  identifierstyle=\color{eclipseBlue},
+  keywordstyle=\color{red},
+  commentstyle=\color{eclipseGreen},
+  escapeinside={!?}{?!}
+}
+
+% Code block
+\lstnewenvironment{sml}[1][]{\lstset{language=SML,#1}}{}
+% Inline code
+\def\smle{\lstinline[language=SML]}
+
+% So that smle works inside math mode
+\usepackage{letltxmacro}
+\newcommand*{\SavedLstInline}{}
+\LetLtxMacro\SavedLstInline\smle
+\DeclareRobustCommand*{\smle}{%
+  \ifmmode
+    \let\SavedBGroup\bgroup
+    \def\bgroup{%
+      \let\bgroup\SavedBGroup
+      \hbox\bgroup
+    }%
+  \fi
+  \SavedLstInline
+}
+
+% For red-black trees
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+    font=\sffamily},
+  arn_n/.style = {treenode, circle, white, font=\sffamily\bfseries, draw=black,
+    fill=black, text width=1.5em},% arbre rouge noir, noeud noir
+  arn_r/.style = {treenode, circle, red, draw=red,
+    text width=1.5em, very thick},% arbre rouge noir, noeud rouge
+  arn_x/.style = {treenode, rectangle, %draw=black,
+    minimum width=0.5em, minimum height=0.5em},% arbre rouge noir, nil
+  arn_t/.style = {treenode, regular polygon, regular polygon sides=3,
+    fill=Sepia!20, draw=black, minimum size=4.0em}% arbre rouge noir, tree
+}

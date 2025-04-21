@@ -1,0 +1,248 @@
+
+\documentclass[11pt]{article}
+
+\newcommand{\issolution}{true}
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+
+\input{preamble.tex}
+\input{asgn.tex}
+
+\title{\textbf{15-150 Fall 2024\\Homework 04}}
+\author{YOUR NAME HERE -- \texttt{YOUR ANDREWID HERE}}
+
+\begin{document}
+\maketitle
+
+\section{Insertion Sort}
+
+\subsection{Insertion Sort on Lists}
+
+\subsection{Sorting Trees by Insertion}
+
+\begin{task}{6} %
+Write the recurrence relation for the work of \smle{Insert} in terms of the
+height of the input tree, deduce an upper-bound approximation in closed form,
+and determine a tight big-O class for it.  Use this to identify the best and
+worst cases measured in terms of the number of nodes in the tree, and give
+their big-O classes.  Do the same for its span.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle{Insert}}}
+\declarecommand{\Sa}{S_{\smle{Insert}}}
+\addtocounter{taskNum}{1}
+\begin{task}{10} %
+Write the recurrence relation for the work of \smle{ILsort} in terms of the
+number of nodes in the tree.  For both the best case and the worst case,
+deduce an upper-bound approximation in closed form, and determine a tight
+big-O class for it.  Do the same for its span.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle{Insert}}}
+\declarecommand{\Wb}{W_{\smle{InsList}}}
+\declarecommand{\Wc}{W_{\smle{ILsort}}}
+\declarecommand{\Wd}{W_{\smle{inorder}}}
+\declarecommand{\Sa}{S_{\smle{Insert}}}
+\declarecommand{\Sb}{S_{\smle{InsList}}}
+\declarecommand{\Sc}{S_{\smle{ILsort}}}
+\declarecommand{\Sd}{S_{\smle{inorder}}}
+\begin{task}{2} %
+Chances are that your code does not prevent the worst case scenario from
+happening.  How would you modify it so that the best case is always realized.
+Explain why.  [You are not required to modify your code in this way, although
+you are welcome to.]
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle{rebalance}}}
+\declarecommand{\Sa}{S_{\smle{rebalance}}}
+\subsection{Insertion Sort for Trees}
+
+\addtocounter{taskNum}{1}
+\section{Balanced Trees}
+
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\addtocounter{taskNum}{1}
+\begin{task}{2} %
+  Give a recurrence that describes the work $W_{\smle{splitN}}(d)$ of
+  \smle{splitN} in terms of the \emph{height} $d$ of the input tree.  Give a
+  tight big-O bound for $W_{\smle{splitN}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle!splitN!}}
+\declarecommand{\Wb}{W_{\smle!leftmost!}}
+\declarecommand{\Wc}{W_{\smle!halves!}}
+\declarecommand{\Wd}{W_{\smle!rebalance!}}
+\begin{task}{2} %
+  Give a recurrence that describes the work $W_{\smle{leftmost}}(d)$ of
+  \smle{leftmost} in terms of the \emph{height} $d$ of the input tree.  Give a
+  tight big-O bound for $W_{\smle{leftmost}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle!splitN!}}
+\declarecommand{\Wb}{W_{\smle!leftmost!}}
+\declarecommand{\Wc}{W_{\smle!halves!}}
+\declarecommand{\Wd}{W_{\smle!rebalance!}}
+\begin{task}{2} %
+  Give a recurrence that describes the work $W_{\smle{halves}}(d)$ of
+  \smle{halves} in terms of the \emph{height} of the input tree.  Give a tight
+  big-O bound for $W_{\smle{halves}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle!splitN!}}
+\declarecommand{\Wb}{W_{\smle!leftmost!}}
+\declarecommand{\Wc}{W_{\smle!halves!}}
+\declarecommand{\Wd}{W_{\smle!rebalance!}}
+\begin{task}{2} %
+  Give a recurrence that describes the work $W_{\smle{rebalance}}(n)$ of
+  \smle{rebalance} in terms of the \emph{size} $n$ of the input tree.
+  Show how to obtain a closed form for this recurrence; your closed form may
+  involve a sum.  Use this closed form to give a tight big-O bound for
+  $W_{\smle{rebalance}}(n)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle!splitN!}}
+\declarecommand{\Wb}{W_{\smle!leftmost!}}
+\declarecommand{\Wc}{W_{\smle!halves!}}
+\declarecommand{\Wd}{W_{\smle!rebalance!}}
+\declarecommand{\Ka}{\makebox[2em]{\ensuremath{k_1+k_2n}}}
+\declarecommand{\K}[1]{\makebox[1.5em]{\ensuremath{k_1+k_2\frac{n}{#1}}}}
+\declarecommand{\Kl}[1]{\makebox[1.5em][l]{\ensuremath{k_1+k_2\frac{n}{#1}}}}
+\declarecommand{\Kr}[1]{\makebox[1.5em][r]{\ensuremath{k_1+k_2\frac{n}{#1}}}}
+\begin{task}{2} %
+  How does the work of \smle{rebalance} change if you know that the input tree
+  is \emph{roughly balanced}?  A tree is roughly balance if its height is
+  $O(\log\,n)$.  Redo the calculations for $W_{\smle{rebalance}}(n)$ to
+  incorporate this additional piece of information.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Wa}{W_{\smle!splitN!}}
+\declarecommand{\Wb}{W_{\smle!leftmost!}}
+\declarecommand{\Wc}{W_{\smle!halves!}}
+\declarecommand{\Wd}{W_{\smle!rebalance!}}
+\declarecommand{\Ka}{\makebox[2em]{\ensuremath{k_1+k_2\log\,n}}}
+\declarecommand{\K}[1]{\makebox[2.3em]{\ensuremath{k_1+k_2\log\frac{n}{#1}}}}
+\declarecommand{\Kl}[1]{\makebox[1.5em][l]{\ensuremath{k_1+k_2\log\frac{n}{#1}}}}
+\declarecommand{\Kr}[1]{\makebox[1.5em][r]{\ensuremath{k_1+k_2\log\frac{n}{#1}}}}
+\begin{task}{2} %
+  Give a recurrence that describes the span $S_{\smle{splitN}}(d)$ of
+  \smle{splitN} in terms of the \emph{height} $d$ of the input tree.  Give a
+  tight big-O bound for $S_{\smle{splitN}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Sa}{S_{\smle!splitN!}}
+\declarecommand{\Sb}{S_{\smle!leftmost!}}
+\declarecommand{\Sc}{S_{\smle!halves!}}
+\declarecommand{\Sd}{S_{\smle!rebalance!}}
+\begin{task}{2} %
+  Give a recurrence that describes the span $S_{\smle{leftmost}}(d)$ of
+  \smle{leftmost}, in terms of the \emph{height} $d$ of the input tree.  Give a
+  tight big-O bound for $S_{\smle{leftmost}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Sa}{S_{\smle!splitN!}}
+\declarecommand{\Sb}{S_{\smle!leftmost!}}
+\declarecommand{\Sc}{S_{\smle!halves!}}
+\declarecommand{\Sd}{S_{\smle!rebalance!}}
+\begin{task}{2} %
+  Give a recurrence that describes the span $S_{\smle{halves}}(d)$ of
+  \smle{halves} in terms of the \emph{height} of the input tree.  Give a tight
+  big-O bound for $S_{\smle{halves}}(d)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Sa}{S_{\smle!splitN!}}
+\declarecommand{\Sb}{S_{\smle!leftmost!}}
+\declarecommand{\Sc}{S_{\smle!halves!}}
+\declarecommand{\Sd}{S_{\smle!rebalance!}}
+\begin{task}{2}
+  Give a recurrence that describes the span $S_{\smle{rebalance}}(n)$ of
+  \smle{rebalance} in terms of the \emph{size} $n$ of the input tree.
+  Show how to obtain a closed form for this recurrence; your closed form may
+  involve a sum.  Use this closed form to give a tight big-O bound for
+  $S_{\smle{rebalance}}(n)$.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Sa}{S_{\smle!splitN!}}
+\declarecommand{\Sb}{S_{\smle!leftmost!}}
+\declarecommand{\Sc}{S_{\smle!halves!}}
+\declarecommand{\Sd}{S_{\smle!rebalance!}}
+\declarecommand{\Ka}{k_1+k_2n}
+\declarecommand{\K}[1]{k_1+k_2\frac{n}{#1}}
+\begin{task}{2}
+  How does the span of \smle{rebalance} change if you know that the input tree
+  is roughly balanced?  Redo the calculations for $S_{\smle{rebalance}}(n)$ to
+  incorporate this additional piece of information.
+\end{task}
+
+\begin{solution}
+TYPE YOUR SOLUTION HERE
+\end{solution}
+
+
+\declarecommand{\Sa}{S_{\smle!splitN!}}
+\declarecommand{\Sb}{S_{\smle!leftmost!}}
+\declarecommand{\Sc}{S_{\smle!halves!}}
+\declarecommand{\Sd}{S_{\smle!rebalance!}}
+\declarecommand{\Ka}{k_1+k_2\log\,n}
+\declarecommand{\K}[1]{k_1+k_2\log\frac{n}{#1}}
+\end{document}
