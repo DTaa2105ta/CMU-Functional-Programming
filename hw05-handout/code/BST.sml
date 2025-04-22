@@ -8,16 +8,22 @@ datatype 'a bst = Empty
 *)
 fun allLess (Empty: 'a bst, _: int): bool = true
   | allLess (Node (left, (k', _), right), k) = 
-  k' < k andalso allLess (left, k) andalso allLess (right, k)
+    k' < k andalso 
+    allLess (left, k) andalso 
+    allLess (right, k)
   
 fun allGreater (Empty: 'a bst, _: int): bool = true
   | allGreater (Node (left, (k', _), right), k) =
-  k' > k andalso allGreater (left, k) andalso allGreater (right, k)
+    k' > k andalso 
+    allGreater (left, k) 
+    andalso allGreater (right, k)
   
 fun is_bst (Empty: 'a bst): bool = true
   | is_bst (Node (left, (k, _), right)) =
-    allLess (left, k) andalso allGreater (right, k) andalso
-    is_bst left andalso is_bst right
+    allLess (left, k) andalso 
+    allGreater (right, k) andalso
+    is_bst left andalso 
+    is_bst right
 (* Test cases for is_bst *)
 
 (* Base cases *)
@@ -90,3 +96,14 @@ val deep_violation_bst =
         Node(Empty, (40, "forty"), Empty)
     )
 val test_bst_deep_violation = is_bst deep_violation_bst = false
+
+(* Invalid BST - 7 violates the left-subtree rule *)
+val invalidBST= 
+    Node(
+        Node(
+            Node(Empty, (2, #"a"), Empty),
+            (3, #"b"),
+            Node(Empty, (7, #"e"), Empty)),  (* 7 > 5 violates BST property *)
+        (5, #"d"),
+        Node(Empty, (6, #"i"), Empty))
+val invalidBSTResult = is_bst invalidBST = false
