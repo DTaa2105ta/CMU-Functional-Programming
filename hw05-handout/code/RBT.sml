@@ -89,6 +89,24 @@ fun is_rbt (t: 'a rbt): bool =
                 NONE => false
               | SOME _ => is_bst t  (* Only check BST if black_height is valid *)
   end
+
+(* 
+lookup (k, t) == > res
+REQUIRES : is_rbt t
+ENSURES : if in ((k,d), inorder t) then res = SOME d else res = NONE
+*)
+fun lookup (k: key , Empty : 'a rbt) : 'a option = NONE
+  | lookup (k: key , Red(tl ,(k',d) ,tr) ) =
+    case Int. compare (k, k ')
+      of LESS = > lookup (k, tl)
+       | EQUAL = > SOME d
+       | GREATER = > lookup (k, tr)
+  | lookup (k: key , Black (tl ,(k',d) ,tr) ) =
+    case Int. compare (k, k ')
+      of LESS = > lookup (k, tl)
+       | EQUAL = > SOME d
+       | GREATER = > lookup (k, tr)
+
 (* Test cases for is_rbt *)
 
 (* Base cases - testing fundamental RBT properties *)
