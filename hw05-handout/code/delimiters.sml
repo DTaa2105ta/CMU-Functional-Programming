@@ -1,3 +1,5 @@
+Control.Print.printLength := 100;
+Control.Print.printDepth := 100;
 
 (* Left and right parentheses *)
 datatype par = LPAR | RPAR
@@ -11,9 +13,11 @@ datatype pTree = empty                (* no parentheses *)
 (* Stack of either open parentheses or parse trees *)
 datatype stackItem = OPEN
                    | T of pTree
+(*
+OPEN: open parentheses that we have not closed yet
+T: pTree's that we have completely recognized
+*)
 type stack = stackItem list
-
-
 (********************* Begin utility functions *********************)
 
 (* pList_fromString s ==> ps
@@ -56,15 +60,51 @@ fun stack_toString ([]: stack): string = "#"
                                stack_toString S
 
 (********************** End utility functions **********************)
+fun valid (parList: pList): bool = 
+  let
+    fun valid' ([]: pList, acc: int): int = acc
+      | valid' (RPAR :: ps, acc) = valid' (ps, acc - 1)
+      | valid' (LPAR :: ps, acc) = 
+        case acc < 0
+          of true => valid' (ps, acc)
+           | false => valid' (ps, acc + 1)
+  in
+    valid' (parList, 0) = 0
+  end
+(*
+flattenPTree: pTree -> pList
+ENSURES: converts a pTree to the corresponding pList
+*)
+fun flattenPTree(empty: pTree): pList = []
+  | flattenPTree(nested pt) =
+      let 
+        val s = pTree_toString (nested pt)
+      in
+        pList_fromString s
+      end
+  | flattenPTree(sbs (pt1, pt2)) = flattenPTree pt1 @ flattenPTree pt2
+(**)
 
-fun valid        _ = raise Fail "Unimplemented"
-fun flattenPTree _ = raise Fail "Unimplemented"
-fun pp           _ = raise Fail "Unimplemented"
-fun parsePar     _ = raise Fail "Unimplemented"
-
-
-
-
+fun preProcessStack ([]: stack): stack = []
+  | preProcessStack (OPEN :: ss) = OPEN :: ss
+  | preProcessStack (T (t) :: OPEN :: ss) = T (t) :: OPEN :: ss
+  | preProcessStack (T (t2) :: T (t1) :: ss) = preProcessStack(T (sbs (t1, t2)) :: ss)
+  
+fun processRPAR ([]: stack): stack = raise Fail "Not as task's assumption"
+	| processRPAR (OPEN :: ss) = T (nested empty) :: ss
+	| processRPAR (T (t) :: OPEN :: ss) = T (nested (t)) :: ss
+(* Process the final T pTree stack to produce a single pTree *)
+fun finalizeStack ([]: stack): pTree = empty
+  | finalizeStack (T t :: []) = t
+  | finalizeStack (T t2 :: T t1 :: ss) = finalizeStack (T (sbs(t1, t2)) :: ss)
+(* Main parsing function *)
+fun pp (ps: pList, S: stack): pTree =
+  case ps of
+    [] => finalizeStack S
+  | LPAR :: rest => pp(rest, OPEN :: S)
+  | RPAR :: rest => pp(rest, processRPAR (preProcessStack S))
+		
+fun parsePar ()      _ = raise Fail "Unimplemented"
 (******************************* BONUS PART ******************************)
 
 (* Left and right delimiters *)
@@ -142,8 +182,9 @@ fun valid2 (parList: pList): bool =
   in
     valid2' (parList, 0) = 0
   end
-        
-fun flattenPTree2 _ = raise Fail "Unimplemented"
+(*        
+fun flattenPTree2 (Empty; pTree): bool = Tree
+  | flattenPTree2 (): 
 fun pp2           _ = raise Fail "Unimplemented"
 fun parsePar2     _ = raise Fail "Unimplemented"
-
+*)
