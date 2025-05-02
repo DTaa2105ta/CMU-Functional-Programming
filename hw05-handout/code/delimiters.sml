@@ -104,7 +104,7 @@ fun pp (ps: pList, S: stack): pTree =
   | LPAR :: rest => pp(rest, OPEN :: S)
   | RPAR :: rest => pp(rest, processRPAR (preProcessStack S))
 		
-fun parsePar ()      _ = raise Fail "Unimplemented"
+fun parsePar (parList: pList): pTree = pp(parList, [])
 (******************************* BONUS PART ******************************)
 
 (* Left and right delimiters *)
