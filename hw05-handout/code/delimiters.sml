@@ -84,12 +84,12 @@ fun flattenPTree(empty: pTree): pList = []
       end
   | flattenPTree(sbs (pt1, pt2)) = flattenPTree pt1 @ flattenPTree pt2
 (**)
-
-fun preProcessStack ([]: stack): stack = []
-  | preProcessStack (OPEN :: ss) = OPEN :: ss
-  | preProcessStack (T (t) :: OPEN :: ss) = T (t) :: OPEN :: ss
-  | preProcessStack (T (t2) :: T (t1) :: ss) = preProcessStack(T (sbs (t1, t2)) :: ss)
-  
+fun preProcessStack (S: stack): stack =
+  case S of
+    [] => []
+  | T (t2) :: T (t1) :: ss => preProcessStack(T (sbs (t1, t2)) :: ss)
+  | _ => S
+(* Process the stack when we see a right parenthesis *)
 fun processRPAR ([]: stack): stack = raise Fail "Not as task's assumption"
 	| processRPAR (OPEN :: ss) = T (nested empty) :: ss
 	| processRPAR (T (t) :: OPEN :: ss) = T (nested (t)) :: ss

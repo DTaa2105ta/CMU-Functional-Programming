@@ -54,7 +54,7 @@ val test15 = pp([LPAR, RPAR, RPAR],
                 [T(nested empty), OPEN, T(nested empty), T(nested empty)]) = 
                 sbs(nested empty, sbs(nested empty, nested(sbs(nested empty, nested empty))))
 (* Ordinary test case *)
-val test 16 = pp(pList_fromString ")(())", [OPEN]) = 
+val test16 = pp(pList_fromString ")(())", [OPEN]) = 
                 sbs (nested empty,nested (nested empty)) (* ()(()) *)
 
 (* Simple pass/fail output *)
@@ -73,5 +73,5 @@ val _ = app (fn (name, test) =>
      ("test12", test12),
      ("test13", test13),
      ("test14", test14),
-     ("test15", test15)
+     ("test15", test15),
      ("test16", test16)]
