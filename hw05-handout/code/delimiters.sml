@@ -75,14 +75,7 @@ fun valid (parList: pList): bool =
 flattenPTree: pTree -> pList
 ENSURES: converts a pTree to the corresponding pList
 *)
-fun flattenPTree(empty: pTree): pList = []
-  | flattenPTree(nested pt) =
-      let 
-        val s = pTree_toString (nested pt)
-      in
-        pList_fromString s
-      end
-  | flattenPTree(sbs (pt1, pt2)) = flattenPTree pt1 @ flattenPTree pt2
+fun flattenPTree (pt: pTree): pList = pList_fromString (pTree_toString pt)
 (**)
 fun preProcessStack (S: stack): stack =
   case S of
@@ -182,11 +175,9 @@ fun valid2(ps: pList2): bool =
 	in
 		valid2'(ps, [])
 	end
-(*     
-fun flattenPTree2 (Empty: pTree): bool = Tree
-  | flattenPTree2 () = flattenPTree2
-  | flattenPTree2 () =  
-*)
+
+fun flattenPTree2 (pt: pTree2): pList2 = pList2_fromString (pTree2_toString pt)
+
 fun pp2           _ = raise Fail "Unimplemented"
 fun parsePar2     _ = raise Fail "Unimplemented"
 
