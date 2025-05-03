@@ -171,20 +171,22 @@ fun stack2_toString ([]: stack2): string = "#"
                                  stack2_toString S
 
 (********************** End utility functions **********************)
-fun valid2 (parList: pList): bool = 
-  let
-    fun valid2' ([]: pList, acc: int): int = acc
-      | valid2' (RPAR :: ps, acc) = valid2' (ps, acc - 1)
-      | valid2' (LPAR :: ps, acc) = 
-        case acc < 0
-          of true => valid2' (ps, acc)
-           | false => valid2' (ps, acc + 1)
-  in
-    valid2' (parList, 0) = 0
-  end
-(*        
-fun flattenPTree2 (Empty; pTree): bool = Tree
-  | flattenPTree2 (): 
+fun valid2(ps: pList2): bool = 
+	let
+		fun valid2'([]: pList2, hStack: pList2): bool = true
+			| valid2'(L (lstr) :: pss, hStack) = valid2'(pss, L (lstr) :: hStack)
+			| valid2'(R (rstr) :: pss, L (lstr) :: rest) =
+				case rstr = lstr 
+          of false => false
+					 | true => valid2'(pss, rest)
+	in
+		valid2'(ps, [])
+	end
+(*     
+fun flattenPTree2 (Empty: pTree): bool = Tree
+  | flattenPTree2 () = flattenPTree2
+  | flattenPTree2 () =  
+*)
 fun pp2           _ = raise Fail "Unimplemented"
 fun parsePar2     _ = raise Fail "Unimplemented"
-*)
+
