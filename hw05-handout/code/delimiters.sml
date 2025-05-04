@@ -79,8 +79,7 @@ fun flattenPTree (pt: pTree): pList = pList_fromString (pTree_toString pt)
 (**)
 fun preProcessStack (S: stack): stack =
   case S of
-    [] => []
-  | T (t2) :: T (t1) :: ss => preProcessStack(T (sbs (t1, t2)) :: ss)
+    T (t2) :: T (t1) :: ss => preProcessStack(T (sbs (t1, t2)) :: ss)
   | _ => S
 (* Process the stack when we see a right parenthesis *)
 fun processRPAR ([]: stack): stack = raise Fail "Not as task's assumption"
@@ -97,7 +96,7 @@ fun pp (ps: pList, S: stack): pTree =
   | LPAR :: rest => pp(rest, OPEN :: S)
   | RPAR :: rest => pp(rest, processRPAR (preProcessStack S))
 		
-fun parsePar (parList: pList): pTree = pp(parList, [])
+fun parsePar (parList: pList): pTree = pp (parList, [])
 (******************************* BONUS PART ******************************)
 
 (* Left and right delimiters *)
@@ -178,6 +177,24 @@ fun valid2(ps: pList2): bool =
 
 fun flattenPTree2 (pt: pTree2): pList2 = pList2_fromString (pTree2_toString pt)
 
-fun pp2           _ = raise Fail "Unimplemented"
-fun parsePar2     _ = raise Fail "Unimplemented"
+fun preProcessStack2 (S: stack2): stack2 =
+  case S of
+  T2 (t2) :: T2 (t1) :: ss => preProcessStack2(T2 (sbs2 (t1, t2)) :: ss)
+  | _ => S
+(* Process the stack when we see a right parenthesis *)
+fun processRPAR2 ([]: stack2): stack2 = raise Fail "Not as task's assumption"
+	| processRPAR2 ((OPEN2 str) :: ss) = (T2 (nested2 (str, empty2)) :: ss)
+	| processRPAR2 ((T2 t) :: (OPEN2 str) :: ss) = T2 (nested2 (str, t)) :: ss
+(* Process the final T pTree stack to produce a single pTree *)
+fun finalizeStack2 ([]: stack2): pTree2 = empty2
+  | finalizeStack2 ((T2 t) :: []) = t
+  | finalizeStack2 ((T2 t2) :: (T2 t1) :: ss) = finalizeStack2 (T2 (sbs2(t1, t2)) :: ss)
+(* Main parsing function *)
+fun pp2 (ps: pList2, S: stack2): pTree2 =
+  case ps of
+    [] => finalizeStack2 S
+  | (L lstr) :: rest => pp2(rest, (OPEN2 lstr) :: S)
+  | (R rstr) :: rest => pp2(rest, processRPAR2 (preProcessStack2 S))
+
+fun parsePar2 (parList2: pList2): pTree2 = pp2 (parList2, [])
 
